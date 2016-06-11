@@ -5,10 +5,8 @@
  */
 package p3.jordi.miguel;
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 5699dfacb70603d195fc67d9306e0f1515d6d307
+
 import edu.uci.ics.jung.algorithms.layout.CircleLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.UndirectedSparseMultigraph;
