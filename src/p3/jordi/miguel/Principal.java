@@ -5,10 +5,7 @@
  */
 package p3.jordi.miguel;
 
-import com.sun.java.util.jar.pack.Attribute.Layout;
-import com.sun.java.util.jar.pack.Attribute.Layout;
-import com.sun.java.util.jar.pack.Attribute.Layout;
-import com.sun.java.util.jar.pack.Attribute.Layout;
+
 import edu.uci.ics.jung.algorithms.layout.CircleLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.UndirectedSparseMultigraph;
@@ -431,7 +428,7 @@ catch (javax.swing.UnsupportedLookAndFeelException ex) {
     public static UndirectedSparseMultigraph grafo = new UndirectedSparseMultigraph<Torre, Relacion_Torres>();
     public static Lista_Relacion relaciones = new Lista_Relacion();
     public static lista_torres torres = new lista_torres();
-    public static Matrices matrices = new Matrices();
+    //public static Matrices matrices = new Matrices();
     public static int ContadorNodos = 0;
     public static int size = 0;
     public static int size2 = 0;
