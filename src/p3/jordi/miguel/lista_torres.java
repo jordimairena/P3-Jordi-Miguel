@@ -97,10 +97,10 @@ public class lista_torres {
                 System.out.print("[H]");
             }
             if (temp.getNext() != null) {
-                System.out.print("[" + temp.getValue().nombre + " " + temp.getValue().tipo + "] - ");
+                System.out.print("[" + temp.getValue().nombre + "] - ");
                 cont++;
             } else {
-                System.out.print("[" + temp.getValue().nombre + " " + temp.getValue().getTipo() + "]");
+                System.out.print("[" + temp.getValue().nombre + "]");
                 cont++;
             }
             temp = temp.next;

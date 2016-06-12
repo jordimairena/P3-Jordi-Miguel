@@ -1,1 +1,1 @@
-100,Tegucigalpa,Choluteca,200,Tegucigalpa,Yoro,500,Tegucigalpa,Catacamas,200,Tegucigalpa,Tela,800,Tela,Tutule,200,Tutule,Tegucigalpa,45,mo,Yoro,76,Catacamas,Tegucigalpa,78,jordi,juan,98,jordi,miguel,
+5,80.0,Cobre,Togo,Togo Sps,10,9.0,Fibra Optica,Togo,Togo Ceiba,15,60.0,Cobre,Togo Sps,Togo Ceiba,

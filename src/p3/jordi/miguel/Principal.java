@@ -5,8 +5,6 @@
  */
 package p3.jordi.miguel;
 
-
-
 import edu.uci.ics.jung.algorithms.layout.CircleLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.UndirectedSparseMultigraph;
@@ -46,7 +44,7 @@ public class Principal extends javax.swing.JFrame {
             sc = new Scanner(archivo2);
             sc.useDelimiter(",");
             while (sc.hasNext()) {
-                Torre torre1 = new Torre(sc.next(), sc.next());
+                Torre torre1 = new Torre(sc.next());
                 torres.insert(torre1, size2);
                 size2++;
             }
@@ -72,17 +70,19 @@ public class Principal extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txt_nom_lugar = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jcb_tipo = new javax.swing.JComboBox();
         jd_crear_coneccion = new javax.swing.JDialog();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         txt_distancia = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btn_crear_conexion = new javax.swing.JButton();
         cb_lugar1 = new javax.swing.JComboBox();
         cb_lugar2 = new javax.swing.JComboBox();
+        jcb_tipo = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        txt_ancho_de_banda = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -119,10 +119,6 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Tipo Cable:");
-
-        jcb_tipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cobre", "Fibra Optica" }));
-
         javax.swing.GroupLayout jd_crear_torreLayout = new javax.swing.GroupLayout(jd_crear_torre.getContentPane());
         jd_crear_torre.getContentPane().setLayout(jd_crear_torreLayout);
         jd_crear_torreLayout.setHorizontalGroup(
@@ -137,13 +133,9 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(jButton2))
                     .addGroup(jd_crear_torreLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jd_crear_torreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel1))
-                        .addGap(26, 26, 26)
-                        .addGroup(jd_crear_torreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_nom_lugar, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                            .addComponent(jcb_tipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jLabel6)
+                        .addGap(39, 39, 39)
+                        .addComponent(txt_nom_lugar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(110, Short.MAX_VALUE))
         );
         jd_crear_torreLayout.setVerticalGroup(
@@ -155,16 +147,12 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(jd_crear_torreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txt_nom_lugar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addGroup(jd_crear_torreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jcb_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addGap(28, 28, 28))
         );
 
-        jLabel2.setText("Crear Nueva Ruta");
+        jLabel2.setText("Crear Nueva Conexion");
 
         jLabel3.setText("Nuevo Lugar:");
 
@@ -172,17 +160,23 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel7.setText("Distancia entre ambos:");
 
-        jButton1.setText("Agregar");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn_crear_conexion.setText("Agregar");
+        btn_crear_conexion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                btn_crear_conexionMouseClicked(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_crear_conexion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_crear_conexionActionPerformed(evt);
             }
         });
+
+        jcb_tipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cobre", "Fibra Optica" }));
+
+        jLabel1.setText("Tipo Cable:");
+
+        jLabel8.setText("Ancho de Banda:");
 
         javax.swing.GroupLayout jd_crear_coneccionLayout = new javax.swing.GroupLayout(jd_crear_coneccion.getContentPane());
         jd_crear_coneccion.getContentPane().setLayout(jd_crear_coneccionLayout);
@@ -192,31 +186,37 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(jd_crear_coneccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jd_crear_coneccionLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jd_crear_coneccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jd_crear_coneccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel4)
                             .addComponent(jLabel7)
                             .addGroup(jd_crear_coneccionLayout.createSequentialGroup()
                                 .addComponent(jLabel3)
+                                .addGap(86, 86, 86)
+                                .addGroup(jd_crear_coneccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txt_distancia)
+                                    .addComponent(cb_lugar1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cb_lugar2, 0, 140, Short.MAX_VALUE)))
+                            .addGroup(jd_crear_coneccionLayout.createSequentialGroup()
                                 .addGroup(jd_crear_coneccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jd_crear_coneccionLayout.createSequentialGroup()
-                                        .addGap(66, 66, 66)
-                                        .addComponent(jLabel2))
-                                    .addGroup(jd_crear_coneccionLayout.createSequentialGroup()
-                                        .addGap(86, 86, 86)
-                                        .addGroup(jd_crear_coneccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txt_distancia)
-                                            .addComponent(cb_lugar1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(cb_lugar2, 0, 140, Short.MAX_VALUE)))))))
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel8))
+                                .addGap(69, 69, 69)
+                                .addGroup(jd_crear_coneccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jcb_tipo, 0, 140, Short.MAX_VALUE)
+                                    .addComponent(txt_ancho_de_banda)))))
                     .addGroup(jd_crear_coneccionLayout.createSequentialGroup()
-                        .addGap(122, 122, 122)
-                        .addComponent(jButton1)))
-                .addContainerGap(99, Short.MAX_VALUE))
+                        .addGap(119, 119, 119)
+                        .addComponent(btn_crear_conexion))
+                    .addGroup(jd_crear_coneccionLayout.createSequentialGroup()
+                        .addGap(102, 102, 102)
+                        .addComponent(jLabel2)))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         jd_crear_coneccionLayout.setVerticalGroup(
             jd_crear_coneccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jd_crear_coneccionLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jd_crear_coneccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -229,9 +229,17 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(jd_crear_coneccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txt_distancia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jd_crear_coneccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jcb_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jd_crear_coneccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txt_ancho_de_banda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addComponent(btn_crear_conexion)
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -303,63 +311,104 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-
-        String aux = "";
-        String texto = "";
+//        String aux = "";
+//        String texto = "";
+//        Scanner sc = null;
+//        try {
+//            JFileChooser file = new JFileChooser();
+//            file.showOpenDialog(this);
+//            File abre = file.getSelectedFile();
+//            if (abre != null) {
+//                FileReader archivos = new FileReader(abre);
+//                BufferedReader lee = new BufferedReader(archivos);
+//                while ((aux = lee.readLine()) != null) {
+//                    try {
+//
+//                        sc = new Scanner(archivos);
+//                        sc.useDelimiter(",");
+//                        while (sc.hasNext()) {
+//                            int distancia = sc.nextInt();
+//                            double capacidad = sc.nextDouble();
+//                            String tipo = sc.next();
+//                            Torre lugar1 = new Torre(sc.next());
+//                            Torre lugar2 = new Torre(sc.next());
+//                            if (size == 0) {
+//                                Relacion_Torres m = new Relacion_Torres(distancia, capacidad, tipo, lugar1, lugar2);
+//                                relaciones.insert(m, size);
+//                                size++;
+//                            } else if (relaciones.get(size - 1).getPunto1().getNombre().equals(lugar1.getNombre())) {
+//                                Relacion_Torres m = new Relacion_Torres(distancia, capacidad, tipo, relaciones.get(size - 1).getPunto1(), lugar2);
+//                                relaciones.insert(m, size);
+//                                size++;
+//                            } else if (relaciones.get(size - 1).getPunto2().getNombre().equals(lugar1.getNombre())) {
+//                                Relacion_Torres m = new Relacion_Torres(distancia, capacidad, tipo, relaciones.get(size - 1).getPunto2(), lugar2);
+//                                relaciones.insert(m, size);
+//                                size++;
+//                            } else if (relaciones.get(size - 1).getPunto1().getNombre().equals(lugar2.getNombre())) {
+//                                Relacion_Torres m = new Relacion_Torres(distancia, capacidad, tipo, relaciones.get(size - 1).getPunto1(), lugar1);
+//                                relaciones.insert(m, size);
+//                                size++;
+//                            } else if (relaciones.get(size - 1).getPunto2().getNombre().equals(lugar2.getNombre())) {
+//                                Relacion_Torres m = new Relacion_Torres(distancia, capacidad, tipo, relaciones.get(size - 1).getPunto2(), lugar1);
+//                                relaciones.insert(m, size);
+//                                size++;
+//                            }
+//                        }
+//                    } catch (Exception e) {
+//                    } finally {
+//                        sc.close();
+//                        lee.close();
+//                    }
+//                }
+//                
+//
+//            }
+//        } catch (IOException ex) {
+//            JOptionPane.showMessageDialog(null, ex + ""
+//                    + "\nNo se ha encontrado el archivo",
+//                    "ADVERTENCIA!!!", JOptionPane.WARNING_MESSAGE);
+//        }
         Scanner sc = null;
+        File archivo = null;
         try {
-
-            JFileChooser file = new JFileChooser();
-            file.showOpenDialog(this);
-
-            File abre = file.getSelectedFile();
-            if (abre != null) {
-                FileReader archivos = new FileReader(abre);
-                BufferedReader lee = new BufferedReader(archivos);
-                while ((aux = lee.readLine()) != null) {
-                    try {
-
-                        sc = new Scanner(archivos);
-                        sc.useDelimiter(",");
-                        while (sc.hasNext()) {
-                            int distancia = sc.nextInt();
-                            int capacidad = sc.nextInt();
-                            Torre lugar1 = new Torre(sc.next(),sc.next());
-                            Torre lugar2 = new Torre(sc.next(),sc.next());
-                            if (size == 0) {
-                                Relacion_Torres m = new Relacion_Torres(distancia,capacidad, lugar1, lugar2);
-                                relaciones.insert(m, size);
-                                size++;
-                            } else if (relaciones.get(size - 1).getPunto1().getNombre().equals(lugar1.getNombre())) {
-                                Relacion_Torres m = new Relacion_Torres(distancia, capacidad ,relaciones.get(size - 1).getPunto1(), lugar2);
-                                relaciones.insert(m, size);
-                                size++;
-                            } else if (relaciones.get(size - 1).getPunto2().getNombre().equals(lugar1.getNombre())) {
-                                Relacion_Torres m = new Relacion_Torres(distancia,capacidad,  relaciones.get(size - 1).getPunto2(), lugar2);
-                                relaciones.insert(m, size);
-                                size++;
-                            } else if (relaciones.get(size - 1).getPunto1().getNombre().equals(lugar2.getNombre())) {
-                                Relacion_Torres m = new Relacion_Torres(distancia,capacidad, relaciones.get(size - 1).getPunto1(), lugar1);
-                                relaciones.insert(m, size);
-                                size++;
-                            } else if (relaciones.get(size - 1).getPunto2().getNombre().equals(lugar2.getNombre())) {
-                                Relacion_Torres m = new Relacion_Torres(distancia,capacidad, relaciones.get(size - 1).getPunto2(), lugar1);
-                                relaciones.insert(m, size);
-                                size++;
-                            }
-                        }
-                    } catch (Exception e) {
-                    } finally {
-                        sc.close();
-                    }
-                }
-                lee.close();
-
+            archivo = new File("./mapa.txt");
+            sc = new Scanner(archivo);
+            sc.useDelimiter(",");
+            while (sc.hasNext()) {
+                int distancia = sc.nextInt();
+                double capacidad = sc.nextDouble();
+                String tipo = sc.next();
+                Torre lugar1 = new Torre(sc.next());
+                Torre lugar2 = new Torre(sc.next());
+                if (size == 0) {
+                    Relacion_Torres m = new Relacion_Torres(distancia, capacidad, tipo, lugar1, lugar2);
+                    relaciones.insert(m, size);
+                    size++;
+                } else if (relaciones.get(size - 1).getPunto1().getNombre().equals(lugar1.getNombre())) {
+                    Relacion_Torres m = new Relacion_Torres(distancia, capacidad, tipo, relaciones.get(size - 1).getPunto1(), lugar2);
+                    relaciones.insert(m, size);
+                    size++;
+                } else if (relaciones.get(size - 1).getPunto2().getNombre().equals(lugar1.getNombre())) {
+                    Relacion_Torres m = new Relacion_Torres(distancia, capacidad, tipo, relaciones.get(size - 1).getPunto2(), lugar2);
+                    relaciones.insert(m, size);
+                    size++;
+                } else if (relaciones.get(size - 1).getPunto1().getNombre().equals(lugar2.getNombre())) {
+                    Relacion_Torres m = new Relacion_Torres(distancia, capacidad, tipo, relaciones.get(size - 1).getPunto1(), lugar1);
+                    relaciones.insert(m, size);
+                    size++;
+                } else if (relaciones.get(size - 1).getPunto2().getNombre().equals(lugar2.getNombre())) {
+                    Relacion_Torres m = new Relacion_Torres(distancia, capacidad, tipo, relaciones.get(size - 1).getPunto2(), lugar1);
+                    relaciones.insert(m, size);
+                    size++;
+                }                
             }
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, ex + ""
-                    + "\nNo se ha encontrado el archivo",
-                    "ADVERTENCIA!!!", JOptionPane.WARNING_MESSAGE);
+            relaciones.Print_Lista();
+            JOptionPane.showMessageDialog(null,"Archivo Cargado Correctamente");
+            
+                    
+        } catch (Exception e) {
+        } finally {
+            sc.close();
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -396,7 +445,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        Torre nom = new Torre(txt_nom_lugar.getText(), jcb_tipo.getSelectedItem().toString());
+        Torre nom = new Torre(txt_nom_lugar.getText());
         txt_nom_lugar.setText("");
         boolean existe = false;
         for (int i = 0; i <= size - 1; i++) {
@@ -462,62 +511,129 @@ public class Principal extends javax.swing.JFrame {
         this.jd_crear_coneccion.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void btn_crear_conexionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_crear_conexionMouseClicked
         // TODO add your handling code here:
-        Torre NuevoLugar = new Torre(cb_lugar1.getSelectedItem().toString(), torres.get(cb_lugar1.getSelectedIndex()).getTipo());
-        Torre lugarconectado = new Torre(cb_lugar2.getSelectedItem().toString(), torres.get(cb_lugar1.getSelectedIndex()).getTipo());
-        int distancia = Integer.parseInt(txt_distancia.getText());
-        int capacidad = 0;
-        Relacion_Torres z = new Relacion_Torres(distancia, capacidad, NuevoLugar, lugarconectado);
-        boolean existe = false;
-        for (int i = 0; i <= size - 1; i++) {
-            if (NuevoLugar.getNombre().contentEquals(lugarconectado.getNombre())) {
-                existe = true;
-            } else if ((z.getPunto1().getNombre().contentEquals(relaciones.get(i).getPunto1().getNombre())) && (z.getPunto2().getNombre().contentEquals(relaciones.get(i).getPunto2().getNombre()))) {//.equals(relaciones.get(i).getPunto1())&&z.getPunto2().equals(relaciones.get(i).getPunto2()))
-                existe = true;
-            }
+        try {
+            Torre NuevoLugar = new Torre(cb_lugar1.getSelectedItem().toString());
+            Torre lugarconectado = new Torre(cb_lugar2.getSelectedItem().toString());
+            int distancia = Integer.parseInt(txt_distancia.getText());
+            String Tipo = jcb_tipo.getSelectedItem().toString();
+            double capacidad = Double.parseDouble(txt_ancho_de_banda.getText().toString());
+            if (Tipo.equalsIgnoreCase("cobre")) {
+                if (capacidad > 100) {
+                    JOptionPane.showMessageDialog(null, "Ancho de Banda de cobre ha sobrepasado el limite de 100 MB/s");
+                    txt_ancho_de_banda.setText("");
+                } else {                    
+                    Relacion_Torres z = new Relacion_Torres(distancia, capacidad, Tipo, NuevoLugar, lugarconectado);
+                    boolean existe = false;
+                    for (int i = 0; i <= size - 1; i++) {
+                        if (NuevoLugar.getNombre().contentEquals(lugarconectado.getNombre())) {
+                            existe = true;
+                        } else if ((z.getPunto1().getNombre().contentEquals(relaciones.get(i).getPunto1().getNombre())) && (z.getPunto2().getNombre().contentEquals(relaciones.get(i).getPunto2().getNombre()))) {//.equals(relaciones.get(i).getPunto1())&&z.getPunto2().equals(relaciones.get(i).getPunto2()))
+                            existe = true;
+                        }
 
-        }
-        relaciones.Print_Lista();
-        if (existe) {
-            JOptionPane.showMessageDialog(this, "Ya Existe o mismo destino entre ambos");
-            txt_distancia.setText("");
-        } else {
-            JOptionPane.showMessageDialog(this, "No existe, sera agregado");
-            relaciones.insert(z, size);
-            size++;
-            relaciones.Print_Lista();
-            File archivo;
-            FileWriter fw = null;
-            BufferedWriter bw = null;
-            try {
-                archivo = new File("./mapa.txt");
-                fw = new FileWriter(archivo, true);
-                bw = new BufferedWriter(fw);
-                bw.write(distancia + ",");
-                bw.write(NuevoLugar + ",");
-                bw.write(lugarconectado + ",");
-                bw.flush();
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    bw.close();
-                    fw.close();
-                } catch (IOException ex) {
+                    }
+                    relaciones.Print_Lista();
+                    if (existe) {
+                        JOptionPane.showMessageDialog(this, "Ya Existe o mismo destino entre ambos");
+                        txt_distancia.setText("");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "No existe, sera agregado");
+                        relaciones.insert(z, size);
+                        size++;
+                        relaciones.Print_Lista();
+                        File archivo;
+                        FileWriter fw = null;
+                        BufferedWriter bw = null;
+                        try {
+                            archivo = new File("./mapa.txt");
+                            fw = new FileWriter(archivo, true);
+                            bw = new BufferedWriter(fw);
+                            bw.write(distancia + ",");
+                            bw.write(capacidad + ",");
+                            bw.write(Tipo + ",");
+                            bw.write(NuevoLugar + ",");
+                            bw.write(lugarconectado + ",");
+                            bw.flush();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        } finally {
+                            try {
+                                bw.close();
+                                fw.close();
+                            } catch (IOException ex) {
+                            }
+
+                        }
+                        txt_distancia.setText("");
+                    }
                 }
+            } else if (Tipo.equalsIgnoreCase("fibra optica")) {
+                if (capacidad > 10) {
+                    JOptionPane.showMessageDialog(null, "Ancho de Banda de cobre ha sobrepasado el limite de 10 GB/s");
+                    txt_ancho_de_banda.setText("");
+                } else {                    
+                    Relacion_Torres z = new Relacion_Torres(distancia, capacidad, Tipo, NuevoLugar, lugarconectado);
+                    boolean existe = false;
+                    for (int i = 0; i <= size - 1; i++) {
+                        if (NuevoLugar.getNombre().contentEquals(lugarconectado.getNombre())) {
+                            existe = true;
+                        } else if ((z.getPunto1().getNombre().contentEquals(relaciones.get(i).getPunto1().getNombre())) && (z.getPunto2().getNombre().contentEquals(relaciones.get(i).getPunto2().getNombre()))) {//.equals(relaciones.get(i).getPunto1())&&z.getPunto2().equals(relaciones.get(i).getPunto2()))
+                            existe = true;
+                        }
 
+                    }
+                    relaciones.Print_Lista();
+                    if (existe) {
+                        JOptionPane.showMessageDialog(this, "Ya Existe o mismo destino entre ambos");
+                        txt_distancia.setText("");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "No existe, sera agregado");
+                        relaciones.insert(z, size);
+                        size++;
+                        relaciones.Print_Lista();
+                        File archivo;
+                        FileWriter fw = null;
+                        BufferedWriter bw = null;
+                        try {
+                            archivo = new File("./mapa.txt");
+                            fw = new FileWriter(archivo, true);
+                            bw = new BufferedWriter(fw);
+                            bw.write(distancia + ",");
+                            bw.write(capacidad + ",");
+                            bw.write(Tipo + ",");
+                            bw.write(NuevoLugar + ",");
+                            bw.write(lugarconectado + ",");
+                            bw.flush();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        } finally {
+                            try {
+                                bw.close();
+                                fw.close();
+                            } catch (IOException ex) {
+                            }
+
+                        }
+                        txt_distancia.setText("");
+                    }
+                }
             }
-            txt_distancia.setText("");
-        }
-    }//GEN-LAST:event_jButton1MouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }//GEN-LAST:event_btn_crear_conexionMouseClicked
+
+    private void btn_crear_conexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crear_conexionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btn_crear_conexionActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
+        
         for (int i = 0; i < size; i++) {
             grafo.addEdge(relaciones.get(i), relaciones.get(i).getPunto1(), relaciones.get(i).getPunto2(), EdgeType.UNDIRECTED);
         }
@@ -577,9 +693,9 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_crear_conexion;
     private javax.swing.JComboBox cb_lugar1;
     private javax.swing.JComboBox cb_lugar2;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -588,6 +704,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -600,6 +717,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JDialog jd_crear_coneccion;
     private javax.swing.JDialog jd_crear_torre;
     private javax.swing.JDialog jd_mapa;
+    private javax.swing.JTextField txt_ancho_de_banda;
     private javax.swing.JTextField txt_distancia;
     private javax.swing.JTextField txt_nom_lugar;
     // End of variables declaration//GEN-END:variables

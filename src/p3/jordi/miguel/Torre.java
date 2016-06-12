@@ -11,8 +11,7 @@ package p3.jordi.miguel;
  */
 public class Torre {
 
-    public String nombre;
-    public String tipo;
+    public String nombre;    
     boolean visitado;
     public int ID;
 
@@ -20,9 +19,8 @@ public class Torre {
     }
 
     
-    public Torre(String nombre, String tipo) {
-        this.nombre = nombre;
-        this.tipo = tipo;
+    public Torre(String nombre) {
+        this.nombre = nombre;        
     }
 
     
@@ -32,14 +30,6 @@ public class Torre {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
     }
 
     public boolean isVisitado() {

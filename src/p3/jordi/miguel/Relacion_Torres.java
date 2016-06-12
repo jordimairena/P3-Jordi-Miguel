@@ -10,12 +10,16 @@ package p3.jordi.miguel;
  * @author jordi
  */
 public class Relacion_Torres {
-    int distancia,capacidad;
+
+    int distancia;
+    double capacidad;
+    String tipo;
     Torre punto1, punto2;
 
-    public Relacion_Torres(int distancia, int capacidad, Torre punto1, Torre punto2) {
+    public Relacion_Torres(int distancia, double capacidad, String tipo, Torre punto1, Torre punto2) {
         this.distancia = distancia;
         this.capacidad = capacidad;
+        this.tipo = tipo;
         this.punto1 = punto1;
         this.punto2 = punto2;
     }
@@ -28,12 +32,20 @@ public class Relacion_Torres {
         this.distancia = distancia;
     }
 
-    public int getCapacidad() {
+    public double getCapacidad() {
         return capacidad;
     }
 
-    public void setCapacidad(int capacidad) {
+    public void setCapacidad(double capacidad) {
         this.capacidad = capacidad;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public Torre getPunto1() {
@@ -51,7 +63,13 @@ public class Relacion_Torres {
     public void setPunto2(Torre punto2) {
         this.punto2 = punto2;
     }
+
+    @Override
     public String toString() {
-        return "Dist: "+distancia+", Capac: "+ capacidad;
+        if (tipo.equalsIgnoreCase("cobre")) {
+            return "Dist: " + distancia + ", Tipo: " + tipo + ", Capac: " + capacidad + " MB/s";
+        } else {
+            return "Dist: " + distancia + ", Tipo: " + tipo + ", Capac: " + capacidad + " GB/s";
+        }
     }
 }
