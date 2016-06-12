@@ -306,6 +306,7 @@ public class Principal extends javax.swing.JFrame {
 
         String aux = "";
         String texto = "";
+        Scanner sc = null;
         try {
 
             JFileChooser file = new JFileChooser();
@@ -316,9 +317,44 @@ public class Principal extends javax.swing.JFrame {
                 FileReader archivos = new FileReader(abre);
                 BufferedReader lee = new BufferedReader(archivos);
                 while ((aux = lee.readLine()) != null) {
-                    texto += aux + "\n";
+                    try {
+
+                        sc = new Scanner(archivos);
+                        sc.useDelimiter(",");
+                        while (sc.hasNext()) {
+                            int distancia = sc.nextInt();
+                            int capacidad = sc.nextInt();
+                            Torre lugar1 = new Torre(sc.next(),sc.next());
+                            Torre lugar2 = new Torre(sc.next(),sc.next());
+                            if (size == 0) {
+                                Relacion_Torres m = new Relacion_Torres(distancia,capacidad, lugar1, lugar2);
+                                relaciones.insert(m, size);
+                                size++;
+                            } else if (relaciones.get(size - 1).getPunto1().getNombre().equals(lugar1.getNombre())) {
+                                Relacion_Torres m = new Relacion_Torres(distancia, capacidad ,relaciones.get(size - 1).getPunto1(), lugar2);
+                                relaciones.insert(m, size);
+                                size++;
+                            } else if (relaciones.get(size - 1).getPunto2().getNombre().equals(lugar1.getNombre())) {
+                                Relacion_Torres m = new Relacion_Torres(distancia,capacidad,  relaciones.get(size - 1).getPunto2(), lugar2);
+                                relaciones.insert(m, size);
+                                size++;
+                            } else if (relaciones.get(size - 1).getPunto1().getNombre().equals(lugar2.getNombre())) {
+                                Relacion_Torres m = new Relacion_Torres(distancia,capacidad, relaciones.get(size - 1).getPunto1(), lugar1);
+                                relaciones.insert(m, size);
+                                size++;
+                            } else if (relaciones.get(size - 1).getPunto2().getNombre().equals(lugar2.getNombre())) {
+                                Relacion_Torres m = new Relacion_Torres(distancia,capacidad, relaciones.get(size - 1).getPunto2(), lugar1);
+                                relaciones.insert(m, size);
+                                size++;
+                            }
+                        }
+                    } catch (Exception e) {
+                    } finally {
+                        sc.close();
+                    }
                 }
                 lee.close();
+
             }
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, ex + ""
@@ -329,22 +365,22 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
         // TODO add your handling code here:
-        for (int i = 0; i < size; i++) {
-            grafo.addEdge(relaciones.get(i), relaciones.get(i).getPunto1(), relaciones.get(i).getPunto2(), EdgeType.UNDIRECTED);
-        }
-        Layout<Integer, String> layout = new CircleLayout(grafo);
-        layout.setSize(new Dimension(550, 550));
-        BasicVisualizationServer<Integer, String> visualization = new BasicVisualizationServer<Integer, String>(layout);
-        visualization.setPreferredSize(new Dimension(600, 600));
-        visualization.getRenderContext().setLabelOffset(20);
-        visualization.getRenderContext().setVertexLabelTransformer(new ToStringLabeller());
-        visualization.getRenderContext().setEdgeLabelTransformer(new ToStringLabeller());
-        JFrame frame = new JFrame("Togo");
-        frame.getContentPane().add(visualization);
-
-        frame.pack();
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//        for (int i = 0; i < size; i++) {
+//            grafo.addEdge(relaciones.get(i), relaciones.get(i).getPunto1(), relaciones.get(i).getPunto2(), EdgeType.UNDIRECTED);
+//        }
+//        Layout<Integer, String> layout = new CircleLayout(grafo);
+//        layout.setSize(new Dimension(550, 550));
+//        BasicVisualizationServer<Integer, String> visualization = new BasicVisualizationServer<Integer, String>(layout);
+//        visualization.setPreferredSize(new Dimension(600, 600));
+//        visualization.getRenderContext().setLabelOffset(20);
+//        visualization.getRenderContext().setVertexLabelTransformer(new ToStringLabeller());
+//        visualization.getRenderContext().setEdgeLabelTransformer(new ToStringLabeller());
+//        JFrame frame = new JFrame("Togo");
+//        frame.getContentPane().add(visualization);
+//
+//        frame.pack();
+//        frame.setVisible(true);
+//        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jMenu3ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -360,7 +396,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        Torre nom = new Torre(txt_nom_lugar.getText(),jcb_tipo.getSelectedItem().toString());
+        Torre nom = new Torre(txt_nom_lugar.getText(), jcb_tipo.getSelectedItem().toString());
         txt_nom_lugar.setText("");
         boolean existe = false;
         for (int i = 0; i <= size - 1; i++) {
@@ -389,7 +425,7 @@ public class Principal extends javax.swing.JFrame {
             FileWriter fw = null;
             BufferedWriter bw = null;
             try {
-                archivo = new File("./lugares.txt");
+                archivo = new File("./torres.txt");
                 fw = new FileWriter(archivo, true);
                 bw = new BufferedWriter(fw);
                 bw.write(nom + ",");
@@ -428,8 +464,8 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
-        Torre NuevoLugar = new Torre(cb_lugar1.getSelectedItem().toString(),torres.get(cb_lugar1.getSelectedIndex()).getTipo());
-        Torre lugarconectado = new Torre(cb_lugar2.getSelectedItem().toString(),torres.get(cb_lugar1.getSelectedIndex()).getTipo());
+        Torre NuevoLugar = new Torre(cb_lugar1.getSelectedItem().toString(), torres.get(cb_lugar1.getSelectedIndex()).getTipo());
+        Torre lugarconectado = new Torre(cb_lugar2.getSelectedItem().toString(), torres.get(cb_lugar1.getSelectedIndex()).getTipo());
         int distancia = Integer.parseInt(txt_distancia.getText());
         int capacidad = 0;
         Relacion_Torres z = new Relacion_Torres(distancia, capacidad, NuevoLugar, lugarconectado);
@@ -438,8 +474,8 @@ public class Principal extends javax.swing.JFrame {
             if (NuevoLugar.getNombre().contentEquals(lugarconectado.getNombre())) {
                 existe = true;
             } else if ((z.getPunto1().getNombre().contentEquals(relaciones.get(i).getPunto1().getNombre())) && (z.getPunto2().getNombre().contentEquals(relaciones.get(i).getPunto2().getNombre()))) {//.equals(relaciones.get(i).getPunto1())&&z.getPunto2().equals(relaciones.get(i).getPunto2()))
-            existe = true;
-        }
+                existe = true;
+            }
 
         }
         relaciones.Print_Lista();
@@ -500,10 +536,10 @@ public class Principal extends javax.swing.JFrame {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
-/**
- * @param args the command line arguments
- */
-public static void main(String args[]) {
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -514,32 +550,21 @@ public static void main(String args[]) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                
 
-}
+                }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Principal.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } 
-
-catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Principal.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } 
-
-catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Principal.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } 
-
-catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Principal.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Principal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Principal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Principal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
