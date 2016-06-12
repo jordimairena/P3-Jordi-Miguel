@@ -306,63 +306,6 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-//        String aux = "";
-//        String texto = "";
-//        Scanner sc = null;
-//        try {
-//            JFileChooser file = new JFileChooser();
-//            file.showOpenDialog(this);
-//            File abre = file.getSelectedFile();
-//            if (abre != null) {
-//                FileReader archivos = new FileReader(abre);
-//                BufferedReader lee = new BufferedReader(archivos);
-//                while ((aux = lee.readLine()) != null) {
-//                    try {
-//
-//                        sc = new Scanner(archivos);
-//                        sc.useDelimiter(",");
-//                        while (sc.hasNext()) {
-//                            int distancia = sc.nextInt();
-//                            double capacidad = sc.nextDouble();
-//                            String tipo = sc.next();
-//                            Torre lugar1 = new Torre(sc.next());
-//                            Torre lugar2 = new Torre(sc.next());
-//                            if (size == 0) {
-//                                Relacion_Torres m = new Relacion_Torres(distancia, capacidad, tipo, lugar1, lugar2);
-//                                relaciones.insert(m, size);
-//                                size++;
-//                            } else if (relaciones.get(size - 1).getPunto1().getNombre().equals(lugar1.getNombre())) {
-//                                Relacion_Torres m = new Relacion_Torres(distancia, capacidad, tipo, relaciones.get(size - 1).getPunto1(), lugar2);
-//                                relaciones.insert(m, size);
-//                                size++;
-//                            } else if (relaciones.get(size - 1).getPunto2().getNombre().equals(lugar1.getNombre())) {
-//                                Relacion_Torres m = new Relacion_Torres(distancia, capacidad, tipo, relaciones.get(size - 1).getPunto2(), lugar2);
-//                                relaciones.insert(m, size);
-//                                size++;
-//                            } else if (relaciones.get(size - 1).getPunto1().getNombre().equals(lugar2.getNombre())) {
-//                                Relacion_Torres m = new Relacion_Torres(distancia, capacidad, tipo, relaciones.get(size - 1).getPunto1(), lugar1);
-//                                relaciones.insert(m, size);
-//                                size++;
-//                            } else if (relaciones.get(size - 1).getPunto2().getNombre().equals(lugar2.getNombre())) {
-//                                Relacion_Torres m = new Relacion_Torres(distancia, capacidad, tipo, relaciones.get(size - 1).getPunto2(), lugar1);
-//                                relaciones.insert(m, size);
-//                                size++;
-//                            }
-//                        }
-//                    } catch (Exception e) {
-//                    } finally {
-//                        sc.close();
-//                        lee.close();
-//                    }
-//                }
-//                
-//
-//            }
-//        } catch (IOException ex) {
-//            JOptionPane.showMessageDialog(null, ex + ""
-//                    + "\nNo se ha encontrado el archivo",
-//                    "ADVERTENCIA!!!", JOptionPane.WARNING_MESSAGE);
-//        }
         Scanner sc = null;
         File archivo = null;
         try {
@@ -379,7 +322,7 @@ public class Principal extends javax.swing.JFrame {
                     Relacion_Torres m = new Relacion_Torres(distancia, capacidad, tipo, lugar1, lugar2);
                     relaciones.insert(m, size);
                     size++;
-                } else if (relaciones.get(size - 1).getPunto1().getNombre().equals(lugar1.getNombre())) {
+            }else if (relaciones.get(size - 1).getPunto1().getNombre().equals(lugar1.getNombre())) {
                     Relacion_Torres m = new Relacion_Torres(distancia, capacidad, tipo, relaciones.get(size - 1).getPunto1(), lugar2);
                     relaciones.insert(m, size);
                     size++;
@@ -408,22 +351,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
         // TODO add your handling code here:
-//        for (int i = 0; i < size; i++) {
-//            grafo.addEdge(relaciones.get(i), relaciones.get(i).getPunto1(), relaciones.get(i).getPunto2(), EdgeType.UNDIRECTED);
-//        }
-//        Layout<Integer, String> layout = new CircleLayout(grafo);
-//        layout.setSize(new Dimension(550, 550));
-//        BasicVisualizationServer<Integer, String> visualization = new BasicVisualizationServer<Integer, String>(layout);
-//        visualization.setPreferredSize(new Dimension(600, 600));
-//        visualization.getRenderContext().setLabelOffset(20);
-//        visualization.getRenderContext().setVertexLabelTransformer(new ToStringLabeller());
-//        visualization.getRenderContext().setEdgeLabelTransformer(new ToStringLabeller());
-//        JFrame frame = new JFrame("Togo");
-//        frame.getContentPane().add(visualization);
-//
-//        frame.pack();
-//        frame.setVisible(true);
-//        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+// 
     }//GEN-LAST:event_jMenu3ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -535,6 +463,8 @@ public class Principal extends javax.swing.JFrame {
                     existe = true;
                 } else if ((z.getPunto1().getNombre().contentEquals(relaciones.get(i).getPunto1().getNombre())) && (z.getPunto2().getNombre().contentEquals(relaciones.get(i).getPunto2().getNombre()))) {//.equals(relaciones.get(i).getPunto1())&&z.getPunto2().equals(relaciones.get(i).getPunto2()))
                     existe = true;
+                }else{
+                    existe = false;
                 }
 
             }
@@ -578,49 +508,6 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
-//        
-//        Scanner sc = null;
-//        File archivo = null;
-//        try {
-//            archivo = new File("./mapa.txt");
-//            sc = new Scanner(archivo);
-//            sc.useDelimiter(",");
-//            while (sc.hasNext()) {
-//                int distancia = sc.nextInt();
-//                double capacidad = sc.nextDouble();
-//                String tipo = sc.next();
-//                Torre lugar1 = new Torre(sc.next());
-//                Torre lugar2 = new Torre(sc.next());
-//                if (size == 0) {
-//                    Relacion_Torres m = new Relacion_Torres(distancia, capacidad, tipo, lugar1, lugar2);
-//                    relaciones.insert(m, size);
-//                    size++;
-//                } else if (relaciones.get(size - 1).getPunto1().getNombre().equals(lugar1.getNombre())) {
-//                    Relacion_Torres m = new Relacion_Torres(distancia, capacidad, tipo, relaciones.get(size - 1).getPunto1(), lugar2);
-//                    relaciones.insert(m, size);
-//                    size++;
-//                } else if (relaciones.get(size - 1).getPunto2().getNombre().equals(lugar1.getNombre())) {
-//                    Relacion_Torres m = new Relacion_Torres(distancia, capacidad, tipo, relaciones.get(size - 1).getPunto2(), lugar2);
-//                    relaciones.insert(m, size);
-//                    size++;
-//                } else if (relaciones.get(size - 1).getPunto1().getNombre().equals(lugar2.getNombre())) {
-//                    Relacion_Torres m = new Relacion_Torres(distancia, capacidad, tipo, relaciones.get(size - 1).getPunto1(), lugar1);
-//                    relaciones.insert(m, size);
-//                    size++;
-//                } else if (relaciones.get(size - 1).getPunto2().getNombre().equals(lugar2.getNombre())) {
-//                    Relacion_Torres m = new Relacion_Torres(distancia, capacidad, tipo, relaciones.get(size - 1).getPunto2(), lugar1);
-//                    relaciones.insert(m, size);
-//                    size++;
-//                }
-//
-//            }
-//            relaciones.Print_Lista();
-//            JOptionPane.showMessageDialog(null, "Archivo Cargado Correctamente");
-//
-//        } catch (Exception e) {
-//        } finally {
-//            sc.close();
-//        }
         for (int i = 0; i < size; i++) {
             grafo.addEdge(relaciones.get(i), relaciones.get(i).getPunto1(), relaciones.get(i).getPunto2(), EdgeType.UNDIRECTED);
         }
@@ -711,7 +598,6 @@ public class Principal extends javax.swing.JFrame {
     public static UndirectedSparseMultigraph grafo = new UndirectedSparseMultigraph<Torre, Relacion_Torres>();
     public static Lista_Relacion relaciones = new Lista_Relacion();
     public static lista_torres torres = new lista_torres();
-    //public static Matrices matrices = new Matrices();
     public static int ContadorNodos = 0;
     public static int size = 0;
     public static int size2 = 0;

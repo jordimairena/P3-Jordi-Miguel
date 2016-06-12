@@ -16,6 +16,7 @@ public class Relacion_Torres {
     String tipo;
     Torre punto1, punto2;
 
+
     public Relacion_Torres(int distancia, double capacidad, String tipo, Torre punto1, Torre punto2) {
         this.distancia = distancia;
         this.capacidad = capacidad;
