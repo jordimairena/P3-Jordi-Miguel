@@ -329,20 +329,20 @@ public class Principal extends javax.swing.JFrame {
                 int distancia = sc.nextInt();
                 double capacidad = sc.nextDouble();
                 String tipo = sc.next();
-                Torre lugar1 = new Torre();
-                Torre lugar2= new Torre();
-                for (int i = 0; i < size; i++) {
-                    if (sc.next().contentEquals(lista_torres.get(i).getNombre())) {
-                       lugar1 = (Torre)lista_torres.get(i);
-                       break;
-                    }
-                }
-                for (int i = 0; i < size; i++) {
-                    if (sc.next().contentEquals(lista_torres.get(i).getNombre())) {
-                       lugar2 = (Torre)lista_torres.get(i);
-                       break;
-                    }
-                }
+                Torre lugar1 = new Torre(sc.next());
+                Torre lugar2= new Torre(sc.next());
+//                for (int i = 0; i < size; i++) {
+//                    if (lugar1.getNombre().contentEquals(lista_torres.get(i).getNombre())) {
+//                       //Torre lugar3 = ((lista_torres.get(i).getNombre()));
+//                       break;
+//                    }
+//                }
+//                for (int i = 0; i < size; i++) {
+//                    if (lugar2.getNombre().contentEquals(lista_torres.get(i).getNombre())) {
+//                       lugar2 = (Torre)lista_torres.get(i);
+//                       break;
+//                    }
+//                }
                 if (size == 0) {
                     Relacion_Torres m = new Relacion_Torres(distancia, capacidad, tipo, lugar1, lugar2);
                     relaciones.insert(m, size);
