@@ -1,1 +1,0 @@
-10,60.0,Cobre,Togo,Togo Sps,59,9.0,Fibra Optica,Togo,Togo Yoro,69,36.0,Cobre,Togo Yoro,Togo Sps,6,600.0,Cobre,Togo,Togo Sps,
