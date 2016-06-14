@@ -28,7 +28,6 @@ public class grafo {
         for (int i = 0; i < nodos.size(); i++) {
             if (((Torre)nodos.get(i)).toString().equals(origen.toString())) {
                 System.out.println("nodo no se inserto al grafo");
-                return;
             }
         }
        nodos.push_back(origen);

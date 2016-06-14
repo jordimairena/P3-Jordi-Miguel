@@ -329,13 +329,25 @@ public class Principal extends javax.swing.JFrame {
                 int distancia = sc.nextInt();
                 double capacidad = sc.nextDouble();
                 String tipo = sc.next();
-                Torre lugar1 = new Torre(sc.next());
-                Torre lugar2 = new Torre(sc.next());
+                Torre lugar1 = new Torre();
+                Torre lugar2= new Torre();
+                for (int i = 0; i < size; i++) {
+                    if (sc.next().contentEquals(lista_torres.get(i).getNombre())) {
+                       lugar1 = (Torre)lista_torres.get(i);
+                       break;
+                    }
+                }
+                for (int i = 0; i < size; i++) {
+                    if (sc.next().contentEquals(lista_torres.get(i).getNombre())) {
+                       lugar2 = (Torre)lista_torres.get(i);
+                       break;
+                    }
+                }
                 if (size == 0) {
                     Relacion_Torres m = new Relacion_Torres(distancia, capacidad, tipo, lugar1, lugar2);
                     relaciones.insert(m, size);
                     size++;
-            }else if (relaciones.get(size - 1).getPunto1().getNombre().equals(lugar1.getNombre())) {
+                } else if (relaciones.get(size - 1).getPunto1().getNombre().equals(lugar1.getNombre())) {
                     Relacion_Torres m = new Relacion_Torres(distancia, capacidad, tipo, relaciones.get(size - 1).getPunto1(), lugar2);
                     relaciones.insert(m, size);
                     size++;
@@ -451,8 +463,9 @@ public class Principal extends javax.swing.JFrame {
     private void btn_crear_conexionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_crear_conexionMouseClicked
         // TODO add your handling code here:
         boolean validar = false;
-        Torre NuevoLugar = new Torre(cb_lugar1.getSelectedItem().toString());
-        Torre lugarconectado = new Torre(cb_lugar2.getSelectedItem().toString());
+        Torre NuevoLugar = lista_torres.get(cb_lugar1.getSelectedIndex());
+        Torre lugarconectado = lista_torres.get(cb_lugar2.getSelectedIndex());
+        //System.out.println(grafo.get()+"lista de vertices");
         int distancia = Integer.parseInt(txt_distancia.getText());
         String Tipo = jcb_tipo.getSelectedItem().toString();
         double capacidad = Double.parseDouble(txt_ancho_de_banda.getText().toString());
@@ -484,7 +497,7 @@ public class Principal extends javax.swing.JFrame {
                     existe = true;
                 } else if ((z.getPunto1().getNombre().contentEquals(relaciones.get(i).getPunto1().getNombre())) && (z.getPunto2().getNombre().contentEquals(relaciones.get(i).getPunto2().getNombre()))) {//.equals(relaciones.get(i).getPunto1())&&z.getPunto2().equals(relaciones.get(i).getPunto2()))
                     existe = true;
-                }else{
+                } else {
                     existe = false;
                 }
 
@@ -622,6 +635,7 @@ public class Principal extends javax.swing.JFrame {
     public static UndirectedSparseMultigraph grafo = new UndirectedSparseMultigraph<Torre, Relacion_Torres>();
     public static Lista_Relacion relaciones = new Lista_Relacion();
     public static lista_torres torres = new lista_torres();
+
     public static int ContadorNodos = 0;
     public static int size = 0;
     public static int size2 = 0;

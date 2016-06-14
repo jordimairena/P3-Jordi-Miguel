@@ -11,7 +11,7 @@ package p3.jordi.miguel;
  */
 public class lista_torres {
 
-    Nodo_lista_torres head;
+    static Nodo_lista_torres head;
     private int size = 0;
 
     public lista_torres() {
@@ -46,7 +46,7 @@ public class lista_torres {
         return 0;
     }
 
-    public Torre get(int pos) {
+    public static Torre get(int pos) {
         Nodo_lista_torres temp = head;
         Torre valor = temp.getValue();
         for (int i = 0; i < pos; i++) {
