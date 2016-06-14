@@ -36,15 +36,13 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         Scanner sc = null;
-        File archivo = null;
-        Scanner sc1 = null;
         File archivo2 = null;
         try {
             archivo2 = new File("./torres.txt");
             sc = new Scanner(archivo2);
             sc.useDelimiter(",");
             while (sc.hasNext()) {
-                Torre torre1 = new Torre(sc.next());
+                Torre torre1 = new Torre(sc.next(), sc.next());
                 torres.insert(torre1, size2);
                 size2++;
             }
@@ -70,6 +68,8 @@ public class Principal extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txt_nom_lugar = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        cb_repetidor = new javax.swing.JComboBox();
         jd_crear_coneccion = new javax.swing.JDialog();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -119,12 +119,16 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jLabel9.setText("Tipo de Repetidor:");
+
+        cb_repetidor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Domestica", "Empresarial", "Celular", "Dedicada" }));
+
         javax.swing.GroupLayout jd_crear_torreLayout = new javax.swing.GroupLayout(jd_crear_torre.getContentPane());
         jd_crear_torre.getContentPane().setLayout(jd_crear_torreLayout);
         jd_crear_torreLayout.setHorizontalGroup(
             jd_crear_torreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jd_crear_torreLayout.createSequentialGroup()
-                .addGroup(jd_crear_torreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jd_crear_torreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jd_crear_torreLayout.createSequentialGroup()
                         .addGap(134, 134, 134)
                         .addComponent(jLabel5))
@@ -135,7 +139,12 @@ public class Principal extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel6)
                         .addGap(39, 39, 39)
-                        .addComponent(txt_nom_lugar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txt_nom_lugar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jd_crear_torreLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cb_repetidor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(110, Short.MAX_VALUE))
         );
         jd_crear_torreLayout.setVerticalGroup(
@@ -147,7 +156,11 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(jd_crear_torreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txt_nom_lugar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jd_crear_torreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(cb_repetidor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addGap(28, 28, 28))
         );
@@ -439,7 +452,9 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        Torre nom = new Torre(txt_nom_lugar.getText());
+        String nombre = txt_nom_lugar.getText();
+        String tipo = cb_repetidor.getSelectedItem().toString();
+        Torre nom = new Torre(nombre, tipo);
         txt_nom_lugar.setText("");
         boolean existe = false;
         for (int i = 0; i <= size - 1; i++) {
@@ -472,7 +487,7 @@ public class Principal extends javax.swing.JFrame {
                 fw = new FileWriter(archivo, true);
                 bw = new BufferedWriter(fw);
                 bw.write(nom + ",");
-
+                bw.write(tipo + ",");
                 bw.flush();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -506,28 +521,34 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void btn_crear_conexionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_crear_conexionMouseClicked
-        // TODO add your handling code here:        
-            Torre NuevoLugar = new Torre(cb_lugar1.getSelectedItem().toString());
-            Torre lugarconectado = new Torre(cb_lugar2.getSelectedItem().toString());
-            int distancia = Integer.parseInt(txt_distancia.getText());
-            String Tipo = jcb_tipo.getSelectedItem().toString();
-            double capacidad = Double.parseDouble(txt_ancho_de_banda.getText().toString());
-            try {
-                if (Tipo.equalsIgnoreCase("cobre")) {
-                    if (capacidad > 100) {
-                        JOptionPane.showMessageDialog(null, "Ancho de Banda de cobre ha sobrepasado el limite de 100 MB/s");
-                        txt_ancho_de_banda.setText("");
-                    }
-                } else if (Tipo.equalsIgnoreCase("fibra optica")) {
-                    if (capacidad > 10) {
-                        JOptionPane.showMessageDialog(null, "Ancho de Banda de cobre ha sobrepasado el limite de 10 GB/s");
-                        txt_ancho_de_banda.setText("");
-                    }
+        // TODO add your handling code here:
+        boolean validar = false;
+        Torre NuevoLugar = new Torre(cb_lugar1.getSelectedItem().toString());
+        Torre lugarconectado = new Torre(cb_lugar2.getSelectedItem().toString());
+        int distancia = Integer.parseInt(txt_distancia.getText());
+        String Tipo = jcb_tipo.getSelectedItem().toString();
+        double capacidad = Double.parseDouble(txt_ancho_de_banda.getText().toString());
+        try {
+            if (Tipo.equalsIgnoreCase("cobre")) {
+                if (capacidad > 100) {
+                    JOptionPane.showMessageDialog(null, "Ancho de Banda de cobre ha sobrepasado el limite de 100 MB/s");
+                    txt_ancho_de_banda.setText("");
+                } else {
+                    validar = true;
                 }
-
-            } catch (Exception e) {
-                e.printStackTrace();
+            } else if (Tipo.equalsIgnoreCase("fibra optica")) {
+                if (capacidad > 10) {
+                    JOptionPane.showMessageDialog(null, "Ancho de Banda de cobre ha sobrepasado el limite de 10 GB/s");
+                    txt_ancho_de_banda.setText("");
+                } else {
+                    validar = true;
+                }
             }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (validar = true) {
             Relacion_Torres z = new Relacion_Torres(distancia, capacidad, Tipo, NuevoLugar, lugarconectado);
             boolean existe = false;
             for (int i = 0; i <= size - 1; i++) {
@@ -572,6 +593,7 @@ public class Principal extends javax.swing.JFrame {
                 }
                 txt_distancia.setText("");
             }
+        }
 
 
     }//GEN-LAST:event_btn_crear_conexionMouseClicked
@@ -683,6 +705,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btn_crear_conexion;
     private javax.swing.JComboBox cb_lugar1;
     private javax.swing.JComboBox cb_lugar2;
+    private javax.swing.JComboBox cb_repetidor;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -692,6 +715,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
