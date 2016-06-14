@@ -14,6 +14,9 @@ public class grafo {
 
     public grafo() {
     }
+    public grafo(lista nodos){
+        this.nodos =nodos;
+    }
 
     public lista getNodos() {
         return nodos;
@@ -50,7 +53,7 @@ public class grafo {
     public int getPeso (Torre origen,Torre destino){
         lista aristas = new lista();
         for (int i = 0; i < nodos.size(); i++) {
-            if (((Torre)nodos.get(i)).getNombre() == origen.getNombre()) {
+            if (((Torre)nodos.get(i)).getNombre().contentEquals(origen.getNombre())) {
                 aristas = ((Torre)nodos.get(i)).aristas;
             }
         }

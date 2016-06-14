@@ -635,7 +635,7 @@ public class Principal extends javax.swing.JFrame {
     public static UndirectedSparseMultigraph grafo = new UndirectedSparseMultigraph<Torre, Relacion_Torres>();
     public static Lista_Relacion relaciones = new Lista_Relacion();
     public static lista_torres torres = new lista_torres();
-
+    public static grafo g = new grafo(); 
     public static int ContadorNodos = 0;
     public static int size = 0;
     public static int size2 = 0;
