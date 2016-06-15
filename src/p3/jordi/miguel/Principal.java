@@ -652,10 +652,9 @@ public class Principal extends javax.swing.JFrame {
                 }
             }
         }
-        System.out.println("size:"+size);
-        System.out.println("size2:"+size2);
+        Floyd.printMatrix(adyacent);
         for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
+            for (int j = 0; j < size2-1; j++) {
                 System.out.println("entro al for");
                 if ((relaciones.get(i).getPunto1().getNombre().contentEquals(torres.get(j).getNombre())) || (relaciones.get(i).getPunto2().getNombre().contentEquals(torres.get(j).getNombre()))) {
                     System.out.println("entro al if");
@@ -667,7 +666,7 @@ public class Principal extends javax.swing.JFrame {
                 }
             }
         }
-        Floyd.printMatrix(adyacent);
+        
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
