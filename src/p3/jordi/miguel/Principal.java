@@ -330,7 +330,7 @@ public class Principal extends javax.swing.JFrame {
                 double capacidad = sc.nextDouble();
                 String tipo = sc.next();
                 Torre lugar1 = new Torre(sc.next());
-                Torre lugar2= new Torre(sc.next());
+                Torre lugar2 = new Torre(sc.next());
 //                for (int i = 0; i < size; i++) {
 //                    if (lugar1.getNombre().contentEquals(lista_torres.get(i).getNombre())) {
 //                       //Torre lugar3 = ((lista_torres.get(i).getNombre()));
@@ -347,27 +347,32 @@ public class Principal extends javax.swing.JFrame {
                     Relacion_Torres m = new Relacion_Torres(distancia, capacidad, tipo, lugar1, lugar2);
                     relaciones.insert(m, size);
                     size++;
+                    ContadorNodos++;
                 } else if (relaciones.get(size - 1).getPunto1().getNombre().equals(lugar1.getNombre())) {
                     Relacion_Torres m = new Relacion_Torres(distancia, capacidad, tipo, relaciones.get(size - 1).getPunto1(), lugar2);
                     relaciones.insert(m, size);
                     size++;
+                    ContadorNodos++;
                 } else if (relaciones.get(size - 1).getPunto2().getNombre().equals(lugar1.getNombre())) {
                     Relacion_Torres m = new Relacion_Torres(distancia, capacidad, tipo, relaciones.get(size - 1).getPunto2(), lugar2);
                     relaciones.insert(m, size);
                     size++;
+                    ContadorNodos++;
                 } else if (relaciones.get(size - 1).getPunto1().getNombre().equals(lugar2.getNombre())) {
                     Relacion_Torres m = new Relacion_Torres(distancia, capacidad, tipo, relaciones.get(size - 1).getPunto1(), lugar1);
                     relaciones.insert(m, size);
                     size++;
+                    ContadorNodos++;
                 } else if (relaciones.get(size - 1).getPunto2().getNombre().equals(lugar2.getNombre())) {
                     Relacion_Torres m = new Relacion_Torres(distancia, capacidad, tipo, relaciones.get(size - 1).getPunto2(), lugar1);
                     relaciones.insert(m, size);
                     size++;
+                    ContadorNodos++;
                 }
             }
             relaciones.Print_Lista();
             JOptionPane.showMessageDialog(null, "Archivo Cargado Correctamente");
-
+            System.out.println(ContadorNodos);
         } catch (Exception e) {
         } finally {
             sc.close();
@@ -475,67 +480,113 @@ public class Principal extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Ancho de Banda de cobre ha sobrepasado el limite de 100 MB/s");
                     txt_ancho_de_banda.setText("");
                 } else {
-                    validar = true;
+                    Relacion_Torres z = new Relacion_Torres(distancia, capacidad, Tipo, NuevoLugar, lugarconectado);
+                    boolean existe = false;
+                    for (int i = 0; i <= size - 1; i++) {
+                        if (NuevoLugar.getNombre().contentEquals(lugarconectado.getNombre())) {
+                            existe = true;
+                        } else if ((z.getPunto1().getNombre().contentEquals(relaciones.get(i).getPunto1().getNombre())) && (z.getPunto2().getNombre().contentEquals(relaciones.get(i).getPunto2().getNombre()))) {//.equals(relaciones.get(i).getPunto1())&&z.getPunto2().equals(relaciones.get(i).getPunto2()))
+                            existe = true;
+                        } else {
+                            existe = false;
+                        }
+
+                    }
+                    relaciones.Print_Lista();
+                    if (existe) {
+                        JOptionPane.showMessageDialog(this, "Ya Existe o mismo destino entre ambos");
+                        txt_distancia.setText("");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "No existe, sera agregado");
+                        relaciones.insert(z, size);
+                        size++;
+                        ContadorNodos++;
+                        relaciones.Print_Lista();
+                        File archivo = new File("./mapa.txt");
+                        FileWriter fw = null;
+                        BufferedWriter bw = null;
+                        try {
+                            archivo = new File("./mapa.txt");
+                            fw = new FileWriter(archivo, true);
+                            bw = new BufferedWriter(fw);
+                            bw.write(distancia + ",");
+                            bw.write(capacidad + ",");
+                            bw.write(Tipo + ",");
+                            bw.write(NuevoLugar + ",");
+                            bw.write(lugarconectado + ",");
+                            bw.flush();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        } finally {
+                            try {
+                                bw.close();
+                                fw.close();
+                            } catch (IOException ex) {
+                            }
+
+                        }
+                        txt_distancia.setText("");
+
+                    }
                 }
             } else if (Tipo.equalsIgnoreCase("fibra optica")) {
                 if (capacidad > 10) {
                     JOptionPane.showMessageDialog(null, "Ancho de Banda de cobre ha sobrepasado el limite de 10 GB/s");
                     txt_ancho_de_banda.setText("");
                 } else {
-                    validar = true;
+                    Relacion_Torres z = new Relacion_Torres(distancia, capacidad, Tipo, NuevoLugar, lugarconectado);
+                    boolean existe = false;
+                    for (int i = 0; i <= size - 1; i++) {
+                        if (NuevoLugar.getNombre().contentEquals(lugarconectado.getNombre())) {
+                            existe = true;
+                        } else if ((z.getPunto1().getNombre().contentEquals(relaciones.get(i).getPunto1().getNombre())) && (z.getPunto2().getNombre().contentEquals(relaciones.get(i).getPunto2().getNombre()))) {//.equals(relaciones.get(i).getPunto1())&&z.getPunto2().equals(relaciones.get(i).getPunto2()))
+                            existe = true;
+                        } else {
+                            existe = false;
+                        }
+
+                    }
+                    relaciones.Print_Lista();
+                    if (existe) {
+                        JOptionPane.showMessageDialog(this, "Ya Existe o mismo destino entre ambos");
+                        txt_distancia.setText("");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "No existe, sera agregado");
+                        relaciones.insert(z, size);
+                        size++;
+                        ContadorNodos++;
+                        relaciones.Print_Lista();
+                        File archivo = new File("./mapa.txt");
+                        FileWriter fw = null;
+                        BufferedWriter bw = null;
+                        try {
+                            archivo = new File("./mapa.txt");
+                            fw = new FileWriter(archivo, true);
+                            bw = new BufferedWriter(fw);
+                            bw.write(distancia + ",");
+                            bw.write(capacidad + ",");
+                            bw.write(Tipo + ",");
+                            bw.write(NuevoLugar + ",");
+                            bw.write(lugarconectado + ",");
+                            bw.flush();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        } finally {
+                            try {
+                                bw.close();
+                                fw.close();
+                            } catch (IOException ex) {
+                            }
+
+                        }
+                        txt_distancia.setText("");
+                    }
+
                 }
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        if (validar = true) {
-            Relacion_Torres z = new Relacion_Torres(distancia, capacidad, Tipo, NuevoLugar, lugarconectado);
-            boolean existe = false;
-            for (int i = 0; i <= size - 1; i++) {
-                if (NuevoLugar.getNombre().contentEquals(lugarconectado.getNombre())) {
-                    existe = true;
-                } else if ((z.getPunto1().getNombre().contentEquals(relaciones.get(i).getPunto1().getNombre())) && (z.getPunto2().getNombre().contentEquals(relaciones.get(i).getPunto2().getNombre()))) {//.equals(relaciones.get(i).getPunto1())&&z.getPunto2().equals(relaciones.get(i).getPunto2()))
-                    existe = true;
-                } else {
-                    existe = false;
-                }
-
-            }
-            relaciones.Print_Lista();
-            if (existe) {
-                JOptionPane.showMessageDialog(this, "Ya Existe o mismo destino entre ambos");
-                txt_distancia.setText("");
-            } else {
-                JOptionPane.showMessageDialog(this, "No existe, sera agregado");
-                relaciones.insert(z, size);
-                size++;
-                relaciones.Print_Lista();
-                File archivo = new File("./mapa.txt");
-                FileWriter fw = null;
-                BufferedWriter bw = null;
-                try {
-                    archivo = new File("./mapa.txt");
-                    fw = new FileWriter(archivo, true);
-                    bw = new BufferedWriter(fw);
-                    bw.write(distancia + ",");
-                    bw.write(capacidad + ",");
-                    bw.write(Tipo + ",");
-                    bw.write(NuevoLugar + ",");
-                    bw.write(lugarconectado + ",");
-                    bw.flush();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    try {
-                        bw.close();
-                        fw.close();
-                    } catch (IOException ex) {
-                    }
-
-                }
-                txt_distancia.setText("");
-            }
         }
 
 
@@ -635,7 +686,7 @@ public class Principal extends javax.swing.JFrame {
     public static UndirectedSparseMultigraph grafo = new UndirectedSparseMultigraph<Torre, Relacion_Torres>();
     public static Lista_Relacion relaciones = new Lista_Relacion();
     public static lista_torres torres = new lista_torres();
-    public static grafo g = new grafo(); 
+    public static grafo g = new grafo();
     public static int ContadorNodos = 0;
     public static int size = 0;
     public static int size2 = 0;
