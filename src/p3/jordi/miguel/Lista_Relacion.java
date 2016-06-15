@@ -11,7 +11,7 @@ package p3.jordi.miguel;
  */
 public class Lista_Relacion {
 
-    Nodo head;
+    static Nodo head;
 
     public Lista_Relacion() {
         head = new Nodo();
@@ -45,7 +45,7 @@ public class Lista_Relacion {
         return 0;
     }
 
-    public Relacion_Torres get(int pos) {
+    public static  Relacion_Torres get(int pos) {
         Nodo temp = head;
         Relacion_Torres valor = temp.getValue();
         for (int i = 0; i < pos; i++) {
