@@ -652,6 +652,7 @@ public class Principal extends javax.swing.JFrame {
                 }
             }
         }
+        Floyd.printMatrix(adyacent);
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size2-1; j++) {
                 System.out.println("entro al for");
