@@ -45,7 +45,7 @@ public class Lista_Relacion {
         return 0;
     }
 
-//    public Relacion_Torres get(int pos) {
+//    public static Relacion_Torres get(int pos) {
 //        Nodo temp = head;
 //        Relacion_Torres valor = temp.getValue();
 //        for (int i = 0; i < pos; i++) {
@@ -56,7 +56,7 @@ public class Lista_Relacion {
 //        return valor;
 //    }
 
-    public Relacion_Torres get(int posicion) {
+    public static  Relacion_Torres get(int posicion) {
         Nodo temp = head;
 
         for (int i = 0; i < posicion; i++) {
@@ -127,20 +127,20 @@ public class Lista_Relacion {
         System.out.println("");
     }
 
-    public int size() {
-        int cont = 0;
-        Nodo temp = head;
-        if (head != null) {
-            cont++;
-            while (temp.hasNext()) {
-                if (temp.hasNext()) {
-                    temp = temp.getNext();
-                    cont++;
-                }
-            }
-            return cont;
-        } else {
-            return 0;
-        }
-    }
+//    public int size() {
+//        int cont = 0;
+//        Nodo temp = head;
+//        if (head != null) {
+//            cont++;
+//            while (temp.hasNext()) {
+//                if (temp.hasNext()) {
+//                    temp = temp.getNext();
+//                    cont++;
+//                }
+//            }
+//            return cont;
+//        } else {
+//            return 0;
+//        }
+//    }
 }

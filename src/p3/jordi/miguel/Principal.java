@@ -654,7 +654,7 @@ public class Principal extends javax.swing.JFrame {
         }
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size-1; j++) {
-                if (Lista_Relacion.get(i).getPunto1().getNombre().contentEquals(lista_torres.get(j).getNombre()) && Lista_Relacion.get(i).getPunto2().getNombre().contentEquals(lista_torres.get(j).getNombre())) {
+                if (relaciones.get(i).getPunto1().getNombre().contentEquals(lista_torres.get(j).getNombre()) && Lista_Relacion.get(i).getPunto2().getNombre().contentEquals(lista_torres.get(j).getNombre())) {
                     adyacent[i][j]=Lista_Relacion.get(i).getDistancia();
                 }
                 else{

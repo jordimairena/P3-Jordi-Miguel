@@ -52,7 +52,6 @@ public class lista_torres {
         for (int i = 0; i <= pos-1; i++) {
             temp = temp.getNext();
             valor = temp.getValue();
-
         }
         return valor;
     }
