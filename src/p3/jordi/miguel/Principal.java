@@ -666,6 +666,7 @@ public class Principal extends javax.swing.JFrame {
                 }
             }
         }
+        Floyd.printMatrix(adyacent);
         
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
