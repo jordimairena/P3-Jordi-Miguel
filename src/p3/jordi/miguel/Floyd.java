@@ -12,7 +12,7 @@ package p3.jordi.miguel;
 public class Floyd {
 
     static int[][] adyacent;
-    static int size;
+    static int size = Principal.size ;
 
     public Floyd() {
     }
