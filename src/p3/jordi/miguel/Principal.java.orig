@@ -653,11 +653,17 @@ public class Principal extends javax.swing.JFrame {
             }
         }
         for (int i = 0; i < size; i++) {
+<<<<<<< HEAD
+            for (int j = 0; j < size-1; j++) {
+                if (relaciones.get(i).getPunto1().getNombre().contentEquals(lista_torres.get(j).getNombre()) && Lista_Relacion.get(i).getPunto2().getNombre().contentEquals(lista_torres.get(j).getNombre())) {
+                    adyacent[i][j]=Lista_Relacion.get(i).getDistancia();
+=======
             for (int j = 0; j < size2-1; j++) {
                 System.out.println("entro al for");
                 if ((relaciones.get(i).getPunto1().getNombre().contentEquals(torres.get(j).getNombre())) || (relaciones.get(i).getPunto2().getNombre().contentEquals(torres.get(j).getNombre()))) {
                     System.out.println("entro al if");
                     adyacent[i][j]=relaciones.get(i).getDistancia();
+>>>>>>> 9fff4f71c26e98ec8b92c5113be62c208367fc91
                 }
                 else{
                     System.out.println("entro al else");
