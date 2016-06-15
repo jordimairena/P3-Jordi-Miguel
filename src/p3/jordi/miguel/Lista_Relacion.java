@@ -113,11 +113,20 @@ public class Lista_Relacion {
         System.out.println("");
     }
 
-    public int getSize() {
+    public int size() {
         int cont = 0;
-        while (head.getNext() != null) {
+        Nodo temp = head;
+        if (head != null) {
             cont++;
+            while (temp.hasNext()) {
+                if (temp.hasNext()) {
+                    temp = temp.getNext();
+                    cont++;
+                }
+            }
+            return cont;
+        } else {
+            return 0;
         }
-        return cont;
     }
 }
