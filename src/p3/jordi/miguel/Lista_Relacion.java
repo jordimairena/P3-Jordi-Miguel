@@ -45,15 +45,29 @@ public class Lista_Relacion {
         return 0;
     }
 
-    public Relacion_Torres get(int pos) {
-        Nodo temp = head;
-        Relacion_Torres valor = temp.getValue();
-        for (int i = 0; i < pos; i++) {
-            temp = temp.getNext();
-            valor = temp.getValue();
+//    public Relacion_Torres get(int pos) {
+//        Nodo temp = head;
+//        Relacion_Torres valor = temp.getValue();
+//        for (int i = 0; i < pos; i++) {
+//            temp = temp.getNext();
+//            valor = temp.getValue();
+//
+//        }
+//        return valor;
+//    }
 
+    public Relacion_Torres get(int posicion) {
+        Nodo temp = head;
+
+        for (int i = 0; i < posicion; i++) {
+            if (temp.hasNext()) {
+                temp = temp.getNext();
+            } else {
+                break;
+            }
         }
-        return valor;
+
+        return temp.getValue();
     }
 
     public Relacion_Torres removeFirst() {
@@ -64,26 +78,26 @@ public class Lista_Relacion {
 
     public void delete(int pos) {
         System.out.println(pos);
-        if (pos == 0 ) {
+        if (pos == 0) {
             Nodo temp = head;
-            head=temp.getNext();
+            head = temp.getNext();
             System.out.println(head.getValue());
             System.out.println(temp.getValue());
             Relacion_Torres data = temp.getValue();
-            
+
             temp.setValue(null);
             temp.setNext(null);
-            
-        }else{
-            
+
+        } else {
+
             Nodo temp = head;
-            for (int i = 1; i < pos-1; i++) {
+            for (int i = 1; i < pos - 1; i++) {
                 temp = temp.getNext();
             }
             System.out.println(temp.getValue());
             Nodo temp2 = temp.getNext();
             temp.setNext(temp2.getNext());
-            Relacion_Torres data2= temp2.getValue();
+            Relacion_Torres data2 = temp2.getValue();
             temp2.setValue(null);
             temp2.setNext(null);
             System.out.println(data2);
