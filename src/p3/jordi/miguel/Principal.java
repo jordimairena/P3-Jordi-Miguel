@@ -38,7 +38,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
-        ImageIcon imageIcon = new ImageIcon(new ImageIcon("./togo.jpg").getImage().getScaledInstance(lbl_togo.getWidth(),lbl_togo.getHeight(), Image.SCALE_DEFAULT));
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon("./togo.jpg").getImage().getScaledInstance(lbl_togo.getWidth(), lbl_togo.getHeight(), Image.SCALE_DEFAULT));
         lbl_togo.setIcon(imageIcon);
         Scanner sc = null;
         File archivo2 = null;
@@ -97,6 +97,8 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
 
         javax.swing.GroupLayout jd_mapaLayout = new javax.swing.GroupLayout(jd_mapa.getContentPane());
         jd_mapa.getContentPane().setLayout(jd_mapaLayout);
@@ -309,6 +311,17 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jMenu3.add(jMenuItem4);
+
+        jMenuItem5.setText("Floyd");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem5);
+
+        jMenuItem6.setText("Prim");
+        jMenu3.add(jMenuItem6);
 
         jMenuBar1.add(jMenu3);
 
@@ -629,9 +642,32 @@ public class Principal extends javax.swing.JFrame {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        int[][] adyacent = new int[ContadorNodos][ContadorNodos];
+        for (int i = 0; i < ContadorNodos; i++) {
+            for (int j = 0; j < ContadorNodos; j++) {
+                if (i == j) {
+                    adyacent[i][j] = 0;
+                }
+            }
+        }
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size-1; j++) {
+                if (Lista_Relacion.get(i).getPunto1().getNombre().contentEquals(lista_torres.get(j).getNombre()) && Lista_Relacion.get(i).getPunto2().getNombre().contentEquals(lista_torres.get(j).getNombre())) {
+                    adyacent[i][j]=Lista_Relacion.get(i).getDistancia();
+                }
+                else{
+                    adyacent[i][j]=999;
+                }
+            }
+        }
+        Floyd.printMatrix(adyacent);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
     /**
-     * @param args the command line arguments
-     */
+         * @param args the command line arguments
+         */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -692,6 +728,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JComboBox jcb_tipo;
     private javax.swing.JDialog jd_crear_coneccion;
     private javax.swing.JDialog jd_crear_torre;

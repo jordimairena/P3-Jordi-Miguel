@@ -49,7 +49,7 @@ public class lista_torres {
     public static Torre get(int pos) {
         Nodo_lista_torres temp = head;
         Torre valor = temp.getValue();
-        for (int i = 0; i < pos; i++) {
+        for (int i = 0; i <= pos-1; i++) {
             temp = temp.getNext();
             valor = temp.getValue();
 
