@@ -45,6 +45,9 @@ public class Lista_Relacion {
         return 0;
     }
 
+<<<<<<< HEAD
+    public static  Relacion_Torres get(int pos) {
+=======
 //    public Relacion_Torres get(int pos) {
 //        Nodo temp = head;
 //        Relacion_Torres valor = temp.getValue();
@@ -57,6 +60,7 @@ public class Lista_Relacion {
 //    }
 
     public Relacion_Torres get(int posicion) {
+>>>>>>> e37377eaf7aa8545f9dc3d3954e92ff76ca4e8fb
         Nodo temp = head;
 
         for (int i = 0; i < posicion; i++) {
