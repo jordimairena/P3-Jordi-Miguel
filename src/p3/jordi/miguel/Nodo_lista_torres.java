@@ -37,5 +37,10 @@ public class Nodo_lista_torres {
     public void setNext(Nodo_lista_torres next) {
         this.next = next;
     }
-
+    public boolean hasNext() {
+        if (next != null) {
+            return true;
+        }
+        return false;
+    }
 }

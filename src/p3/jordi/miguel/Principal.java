@@ -498,8 +498,8 @@ public class Principal extends javax.swing.JFrame {
     private void btn_crear_conexionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_crear_conexionMouseClicked
         // TODO add your handling code here:
         boolean validar = false;
-        Torre NuevoLugar = lista_torres.get(cb_lugar1.getSelectedIndex());
-        Torre lugarconectado = lista_torres.get(cb_lugar2.getSelectedIndex());
+        Torre NuevoLugar = torres.get(cb_lugar1.getSelectedIndex());
+        Torre lugarconectado = torres.get(cb_lugar2.getSelectedIndex());
         //System.out.println(grafo.get()+"lista de vertices");
         int distancia = Integer.parseInt(txt_distancia.getText());
         String Tipo = jcb_tipo.getSelectedItem().toString();
@@ -653,11 +653,14 @@ public class Principal extends javax.swing.JFrame {
             }
         }
         for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size-1; j++) {
-                if (Lista_Relacion.get(i).getPunto1().getNombre().contentEquals(lista_torres.get(j).getNombre()) && Lista_Relacion.get(i).getPunto2().getNombre().contentEquals(lista_torres.get(j).getNombre())) {
-                    adyacent[i][j]=Lista_Relacion.get(i).getDistancia();
+            for (int j = 0; j < size2-1; j++) {
+                System.out.println("entro al for");
+                if ((relaciones.get(i).getPunto1().getNombre().contentEquals(torres.get(j).getNombre())) || (relaciones.get(i).getPunto2().getNombre().contentEquals(torres.get(j).getNombre()))) {
+                    System.out.println("entro al if");
+                    adyacent[i][j]=relaciones.get(i).getDistancia();
                 }
                 else{
+                    System.out.println("entro al else");
                     adyacent[i][j]=999;
                 }
             }
