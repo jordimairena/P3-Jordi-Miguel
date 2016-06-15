@@ -12,6 +12,7 @@ import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.visualization.BasicVisualizationServer;
 import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -20,6 +21,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -35,6 +38,8 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon("./togo.jpg").getImage().getScaledInstance(lbl_togo.getWidth(),lbl_togo.getHeight(), Image.SCALE_DEFAULT));
+        lbl_togo.setIcon(imageIcon);
         Scanner sc = null;
         File archivo2 = null;
         try {
@@ -83,6 +88,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         txt_ancho_de_banda = new javax.swing.JTextField();
+        lbl_togo = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -252,6 +258,11 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        lbl_togo.setBackground(new java.awt.Color(0, 0, 0));
+        lbl_togo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lbl_togo.setMaximumSize(new java.awt.Dimension(3120, 1200));
+        lbl_togo.setMinimumSize(new java.awt.Dimension(3120, 1200));
+
         jMenu1.setText("File");
 
         jMenuItem1.setText("Cargar Mapa");
@@ -307,11 +318,17 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 474, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_togo, javax.swing.GroupLayout.PREFERRED_SIZE, 454, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 340, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_togo, javax.swing.GroupLayout.PREFERRED_SIZE, 318, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -330,7 +347,7 @@ public class Principal extends javax.swing.JFrame {
                 double capacidad = sc.nextDouble();
                 String tipo = sc.next();
                 Torre lugar1 = new Torre(sc.next());
-                Torre lugar2= new Torre(sc.next());
+                Torre lugar2 = new Torre(sc.next());
 //                for (int i = 0; i < size; i++) {
 //                    if (lugar1.getNombre().contentEquals(lista_torres.get(i).getNombre())) {
 //                       //Torre lugar3 = ((lista_torres.get(i).getNombre()));
@@ -628,6 +645,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JDialog jd_crear_coneccion;
     private javax.swing.JDialog jd_crear_torre;
     private javax.swing.JDialog jd_mapa;
+    private javax.swing.JLabel lbl_togo;
     private javax.swing.JTextField txt_ancho_de_banda;
     private javax.swing.JTextField txt_distancia;
     private javax.swing.JTextField txt_nom_lugar;
@@ -635,7 +653,7 @@ public class Principal extends javax.swing.JFrame {
     public static UndirectedSparseMultigraph grafo = new UndirectedSparseMultigraph<Torre, Relacion_Torres>();
     public static Lista_Relacion relaciones = new Lista_Relacion();
     public static lista_torres torres = new lista_torres();
-    public static grafo g = new grafo(); 
+    public static grafo g = new grafo();
     public static int ContadorNodos = 0;
     public static int size = 0;
     public static int size2 = 0;
