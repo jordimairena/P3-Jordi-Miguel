@@ -37,5 +37,11 @@ public class Nodo {
 
     public void setNext(Nodo next) {
         this.next = next;
-    } 
+    }
+    public boolean hasNext() {
+        if (next != null) {
+            return true;
+        }
+        return false;
+    }
 }
