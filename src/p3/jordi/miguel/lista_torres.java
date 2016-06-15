@@ -46,7 +46,20 @@ public class lista_torres {
         return 0;
     }
 
+
 //    public Torre get(int pos) {
+//
+//    public Torre get(int pos) {
+//        Nodo_lista_torres temp = head;
+//        Torre valor = temp.getValue();
+//        for (int i = 0; i <= pos; i++) {
+//            temp = temp.getNext();
+//            valor = temp.getValue();
+//        }
+//        return valor;
+//    }
+//    public static Torre get(int posicion) {
+//>>>>>>> 7a1b1e04396157db0b36cbd801f3ff0aa97c0d00
 //        Nodo_lista_torres temp = head;
 //        Torre valor = temp.getValue();
 //        for (int i = 0; i <= pos; i++) {
